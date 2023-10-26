@@ -45,14 +45,7 @@ while running:
                 s = utility.marcian_half_year(planets[1], planets[2], v)
                 ships.append(Ship(planets[1].position, s, 'blue'))
 
-    # speed1 = utility.speed1(planets[1], planets[2])
-    # speed2 = utility.speed2(planets[1], planets[2])
-    # # print(speed)
-    # for s in [speed1, speed2]:
-    #     if not isinstance(s, int):
-    #         ships.append(Ship(planets[1].position, s, pygame.Color(65, 65, 65)))
 
-    # fill the screen with a color to wipe away anything from last frame
     screen.fill("black")
 
     # RENDER YOUR GAME HERE
