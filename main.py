@@ -28,7 +28,7 @@ running = True
 pygame.event.set_keyboard_grab(True)
 launch = False
 
-v = 1000
+v = 1
 
 while running:
     # poll for events
@@ -42,13 +42,8 @@ while running:
 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
-                # s = utility.marcian_year(planets[1], planets[2])
-                # ships.append(Ship(planets[1].position, s, 'red'))
                 s = utility.marcian_half_year(planets[1], planets[2], v)
                 ships.append(Ship(planets[1].position, s, 'blue'))
-                # launch = True
-    s = utility.marcian_half_year(planets[1], planets[2], v)
-    ships.append(Ship(planets[1].position, s, 'blue'))
 
     # speed1 = utility.speed1(planets[1], planets[2])
     # speed2 = utility.speed2(planets[1], planets[2])

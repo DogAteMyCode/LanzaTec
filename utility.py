@@ -44,9 +44,4 @@ def marcian_half_year(earth: Planet, mars: Planet, v_max: float):
         vec = c_mars.position - earth.position
         t = c_mars._angle / c_mars.angularV
         v = vec / t
-    print(v.magnitude())
-    return v
-
-def perpendicular(earth: Planet, mars: Planet, v_max: float):
-
     return v
