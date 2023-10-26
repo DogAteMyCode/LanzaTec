@@ -1,5 +1,6 @@
 import pygame
 import ctypes
+import utility
 from Planet import Planet
 from Ship import Ship
 import numpy as np
@@ -25,8 +26,9 @@ screen = pygame.display.set_mode((w, 0.95 * h))
 clock = pygame.time.Clock()
 running = True
 pygame.event.set_keyboard_grab(True)
-speed = 0
 launch = False
+
+v = 1000
 
 while running:
     # poll for events
@@ -39,21 +41,21 @@ while running:
             running = False
 
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_RIGHT:
-                speed += 1
-            if event.key == pygame.K_LEFT:
-                speed -= 1
             if event.key == pygame.K_SPACE:
-                launch = True
+                # s = utility.marcian_year(planets[1], planets[2])
+                # ships.append(Ship(planets[1].position, s, 'red'))
+                s = utility.marcian_half_year(planets[1], planets[2], v)
+                ships.append(Ship(planets[1].position, s, 'blue'))
+                # launch = True
+    s = utility.marcian_half_year(planets[1], planets[2], v)
+    ships.append(Ship(planets[1].position, s, 'blue'))
 
-    if launch:
-        angle = planets[1].angle + np.pi / 2
-        ships.append(
-            Ship(planets[1].position, angle, speed, pygame.Color(65, 65, 65))
-        )
-        print(ships[-1].speed)
-
-        launch = False
+    # speed1 = utility.speed1(planets[1], planets[2])
+    # speed2 = utility.speed2(planets[1], planets[2])
+    # # print(speed)
+    # for s in [speed1, speed2]:
+    #     if not isinstance(s, int):
+    #         ships.append(Ship(planets[1].position, s, pygame.Color(65, 65, 65)))
 
     # fill the screen with a color to wipe away anything from last frame
     screen.fill("black")
@@ -65,10 +67,13 @@ while running:
         planet.advance(dt)
 
     for ship in ships:
+        if (ship.position - center).magnitude() >= planets[2].radius:
+            ships.remove(ship)
+            del ship
+
+    for ship in ships:
         pygame.draw.polygon(screen, ship.color, ship.vertices)
         ship.advance(dt)
-        if not pygame.Rect((0, 0), (w, h)).contains(ship.position, (1, 1)):
-            ships.remove(ship)
     # flip() the display to put your work on screen
     pygame.display.flip()
 pygame.quit()
