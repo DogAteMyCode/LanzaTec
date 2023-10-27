@@ -45,7 +45,7 @@ while running:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
                 s = utility.marcian_half_year(planets[1], planets[2], v)
-                ships.append(Ship(planets[1].position, s, 'blue'))
+                ships.append(Ship(planets[1].position, s))
 
 
     s = utility.marcian_half_year(planets[1], planets[2], v)
