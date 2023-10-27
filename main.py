@@ -19,7 +19,8 @@ planets += [Planet(0, 0, 0, 1000, 20, "orange", center),
             Planet(200, 0, 1, 200, 10, "blue", center),
             Planet(200 * 1.5229, 0, 1 / 1.8807, 200, 5, "red", center)
             ]
-
+time_scale = 2 * np.pi/3.154e+7
+length_scale = 200/149_610_000
 pygame.init()
 
 screen = pygame.display.set_mode((w, 0.95 * h))
@@ -28,7 +29,8 @@ running = True
 pygame.event.set_keyboard_grab(True)
 launch = False
 
-v = 1
+v = (39600/60**2)*length_scale / (1*time_scale)
+# v = 1000
 
 while running:
     # poll for events
@@ -46,8 +48,9 @@ while running:
                 ships.append(Ship(planets[1].position, s, 'blue'))
 
 
+    s = utility.marcian_half_year(planets[1], planets[2], v)
+    ships.append(Ship(planets[1].position, s))
     screen.fill("black")
-
     # RENDER YOUR GAME HERE
     for planet in planets:
         pygame.draw.circle(screen, planet.color, planet.position, planet.planetRadius)
